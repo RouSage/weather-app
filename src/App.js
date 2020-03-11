@@ -13,7 +13,7 @@ class App extends Component {
     temperature: undefined,
     humidity: undefined,
     description: '',
-    error: ''
+    // error: ''
   };
 
   getWeather = (data) => {
@@ -22,7 +22,7 @@ class App extends Component {
       country: data.sys.country,
       temperature: data.main.temp,
       humidity: data.main.humidity,
-      description: data.weather[0].description
+      description: data.weather[0].description,
     });
   };
 
