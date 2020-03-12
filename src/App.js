@@ -13,21 +13,40 @@ class App extends Component {
     temperature: undefined,
     humidity: undefined,
     description: '',
-    // error: ''
+    error: '',
   };
 
-  getWeather = (data) => {
-    this.setState({
-      city: data.name,
-      country: data.sys.country,
-      temperature: data.main.temp,
-      humidity: data.main.humidity,
-      description: data.weather[0].description,
-    });
+  getWeather = (data, error = null) => {
+    if (!error) {
+      this.setState({
+        city: data.name,
+        country: data.sys.country,
+        temperature: data.main.temp,
+        humidity: data.main.humidity,
+        description: data.weather[0].description,
+        error: '',
+      });
+    } else {
+      this.setState({
+        city: '',
+        country: '',
+        temperature: undefined,
+        humidity: undefined,
+        description: '',
+        error,
+      });
+    }
   };
 
   render() {
-    const { city, country, temperature, humidity, description } = this.state;
+    const {
+      city,
+      country,
+      temperature,
+      humidity,
+      description,
+      error,
+    } = this.state;
 
     return (
       <>
@@ -39,6 +58,7 @@ class App extends Component {
           temperature={temperature}
           humidity={humidity}
           description={description}
+          error={error}
         />
       </>
     );

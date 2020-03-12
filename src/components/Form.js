@@ -14,15 +14,19 @@ class Form extends Component {
     e.preventDefault();
 
     const { city, country } = this.state;
+    const { getWeather } = this.props;
 
-    await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_KEY}&units=metric`,
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        const { getWeather } = this.props;
-        getWeather(data);
-      });
+    if (city && country) {
+      await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_KEY}&units=metric`,
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          getWeather(data);
+        });
+    } else {
+      getWeather(null, 'Please enter the value.');
+    }
   };
 
   handleInputChange(e) {
