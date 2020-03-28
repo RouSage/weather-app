@@ -50,16 +50,26 @@ class App extends Component {
 
     return (
       <>
-        <Titles />
-        <Form getWeather={this.getWeather} />
-        <Weather
-          city={city}
-          country={country}
-          temperature={temperature}
-          humidity={humidity}
-          description={description}
-          error={error}
-        />
+        <div className='wrapper'>
+          <main className='main'>
+            <div className='container'>
+              <div className='title-container'>
+                <Titles />
+              </div>
+              <div className='form-container'>
+                <Form getWeather={this.getWeather} />
+                <Weather
+                  city={city}
+                  country={country}
+                  temperature={temperature}
+                  humidity={humidity}
+                  description={description}
+                  error={error}
+                />
+              </div>
+            </div>
+          </main>
+        </div>
       </>
     );
   }

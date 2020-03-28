@@ -1,0 +1,41 @@
+.form {
+  margin-bottom: 30px;
+}
+
+input[type='text'] {
+  background-color: transparent;
+  border: 0;
+  border-bottom: 1px solid #076969;
+  width: 30%;
+  color: #ffffff;
+  font-weight: 100;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  padding-bottom: 5px;
+  margin-right: 20px;
+}
+
+input[type='text'] {
+  outline: none;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px #202020 inset;
+  -webkit-text-fill-color: #ffffff;
+}
+
+.button {
+  border: 0;
+  padding: 8px 20px;
+  border-radius: 2px;
+  font-weight: 100;
+  letter-spacing: 1px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  color: #ffffff;
+  background-color: #076969;
+}
+
+.button:active {
+  outline: none;
+}

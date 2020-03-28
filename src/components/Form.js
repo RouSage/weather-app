@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './Form.css';
 
 // API Key from https://openweathermap.org/api
 const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
@@ -41,7 +42,7 @@ class Form extends Component {
     const { city, country } = this.state;
 
     return (
-      <form onSubmit={(e) => this.handleSubmit(e)}>
+      <form className='form' onSubmit={(e) => this.handleSubmit(e)}>
         <input
           type='text'
           name='city'
@@ -58,7 +59,9 @@ class Form extends Component {
           placeholder='Country...'
           onChange={(e) => this.handleInputChange(e)}
         />
-        <button type='submit'>Get Weather</button>
+        <button className='button' type='submit'>
+          Get Weather
+        </button>
       </form>
     );
   }
