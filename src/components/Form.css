@@ -39,3 +39,25 @@ input:-webkit-autofill {
 .button:active {
   outline: none;
 }
+
+@media only screen and (max-width: 600px) {
+  .form {
+    margin-bottom: 10px;
+  }
+
+  input[type='text'] {
+    width: 47%;
+    font-size: 0.9rem;
+    margin-right: 10px;
+  }
+  input[type='text']#country {
+    margin-right: 0;
+  }
+
+  .button {
+    display: block;
+    width: 65%;
+    font-size: 0.6rem;
+    margin: 10px auto 0 auto;
+  }
+}
