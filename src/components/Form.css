@@ -61,3 +61,45 @@ input:-webkit-autofill {
     margin: 10px auto 0 auto;
   }
 }
+
+@media only screen and (max-width: 725px) {
+  .button {
+    padding: 8px 15px;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  input[type='text'] {
+    font-size: 1rem;
+    margin-right: 10px;
+  }
+}
+
+@media only screen and (min-width: 601px) and (max-width: 665px) {
+  input[type='text'] {
+    width: 27%;
+    font-size: 0.9rem;
+  }
+
+  .button {
+    font-size: 0.7rem;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  input[type='text'] {
+    font-size: 1.2rem;
+    margin-right: 15px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  input[type='text'] {
+    font-size: 1.5rem;
+    margin-right: 20px;
+  }
+
+  .button {
+    font-size: 1.25rem;
+  }
+}

@@ -37,3 +37,22 @@
     padding: 10px 0;
   }
 }
+
+@media only screen and (min-width: 600px) {
+  .weather__info {
+    width: 90%;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .weather__info {
+    width: 80%;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .weather__info {
+    width: 63%;
+    font-size: 1.5rem;
+  }
+}

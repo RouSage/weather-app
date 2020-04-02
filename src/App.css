@@ -84,3 +84,43 @@ body {
     padding: 25px 10px 10px 10px;
   }
 }
+
+@media only screen and (min-width: 600px) {
+  .main {
+    width: 90%;
+  }
+
+  .title-container {
+    flex: 1 0 30%;
+  }
+
+  .form-container {
+    flex: 1 1 50%;
+    padding-left: 25px;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .title-container {
+    flex: 1 0 40%;
+  }
+
+  .form-container {
+    flex: 1 1 50%;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .main {
+    width: 80%;
+  }
+
+  .title-container {
+    flex: 1 1 50%;
+  }
+
+  .form-container {
+    flex: 1 1 auto;
+    padding-left: 50px;
+  }
+}
