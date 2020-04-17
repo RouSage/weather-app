@@ -1,3 +1,10 @@
+# React Weather Application
+
+This app allows you to find out the weather in your city.<br />
+
+I made it using [this](https://youtu.be/204C9yNeOYI) tutorial by [Hamza Mirza](https://github.com/hamza-mirza) but with my little changes (e.g. components code, CSS, images).<br />
+You can find the original source code [here](https://github.com/hamza-mirza/react-weather-app).
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
