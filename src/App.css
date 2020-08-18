@@ -54,7 +54,25 @@ body {
   color: #000000;
 }
 
-@media screen and (min-width: 321px) {
+@media screen and (min-width: 601px) {
+  .title-container {
+    background: url('img/bg-768w.png') center center no-repeat;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .title-container {
+    background: url('img/bg-992w.png') center center no-repeat;
+  }
+}
+
+@media screen and (min-width: 993px) {
+  .title-container {
+    background: url('img/bg-1199w.png') center center no-repeat;
+  }
+}
+
+@media screen and (min-width: 1200px) {
   .title-container {
     background: url('img/bg.png') center center no-repeat;
   }
