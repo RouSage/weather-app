@@ -45,4 +45,4 @@ Weather.propTypes = {
   error: PropTypes.string,
 };
 
-export default Weather;
+export default React.memo(Weather);

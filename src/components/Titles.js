@@ -8,4 +8,4 @@ const Titles = () => (
   </div>
 );
 
-export default Titles;
+export default React.memo(Titles);
