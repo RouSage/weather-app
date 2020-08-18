@@ -44,7 +44,7 @@ body {
   height: 90vh;
   -webkit-box-flex: 1;
   flex: 1 1 45%;
-  background: url('img/bg.png') center center no-repeat;
+  background: url('img/bg-320w.png') center center no-repeat;
   background-size: cover;
   display: -webkit-box;
   display: flex;
@@ -54,6 +54,12 @@ body {
   align-items: center;
   text-align: center;
   color: #000000;
+}
+
+@media screen and (min-width: 321px) {
+  .title-container {
+    background: url('img/bg.png') center center no-repeat;
+  }
 }
 
 .form-container {
