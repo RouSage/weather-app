@@ -1,3 +1,6 @@
+[![Heroku App Status](https://heroku-shields.herokuapp.com/rousage-weather-app)](https://rousage-weather-app.herokuapp.com)
+![GitHub](https://img.shields.io/github/license/RouSage/weather-app)
+
 # React Weather App
 
 This app allows you to find out the weather in your city.<br />
@@ -18,6 +21,7 @@ npm install
 ```
 
 You also need to create `.env` file in the root of the project and add an API key environment variable like this:
+
 ```
 REACT_APP_WEATHER_API_KEY=<your_api_key_value>
 ```
