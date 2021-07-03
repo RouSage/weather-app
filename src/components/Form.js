@@ -32,7 +32,7 @@ const Form = ({ getWeather }) => {
         const { latitude, longitude } = position.coords;
 
         const response = await fetch(
-          `${API_URL}lat=${latitude}&lon=${longitude}&appid=${API_KEY}`,
+          `${API_URL}&lat=${latitude}&lon=${longitude}&appid=${API_KEY}`,
           { method: 'GET' },
         );
         const data = await response.json();
