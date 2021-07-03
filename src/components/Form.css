@@ -35,9 +35,12 @@ input:-webkit-autofill {
   color: #ffffff;
   background-color: #076969;
 }
-
 .button:active {
   outline: none;
+}
+.button:disabled {
+  opacity: 0.4;
+  cursor: default;
 }
 
 @media only screen and (max-width: 600px) {
