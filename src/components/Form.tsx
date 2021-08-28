@@ -17,7 +17,7 @@ const Form = ({ getWeather }) => {
     if (city && country) {
       const response = await fetch(
         `${API_URL}&q=${city},${country}&appid=${API_KEY}`,
-        { method: 'GET' },
+        { method: 'GET' }
       );
       const data = await response.json();
       getWeather(data);
@@ -33,7 +33,7 @@ const Form = ({ getWeather }) => {
 
         const response = await fetch(
           `${API_URL}&lat=${latitude}&lon=${longitude}&appid=${API_KEY}`,
-          { method: 'GET' },
+          { method: 'GET' }
         );
         const data = await response.json();
         getWeather(data);
@@ -45,7 +45,7 @@ const Form = ({ getWeather }) => {
         enableHighAccuracy: false,
         timeout: 5000,
         maximumAge: 0,
-      },
+      }
     );
   };
 

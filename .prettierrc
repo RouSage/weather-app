@@ -4,6 +4,8 @@
     "jsxBracketSameLine": false,
     "arrowParens": "always",
     "semi": true,
-    "trailingComma": "all",
-    "bracketSpacing": true
+    "trailingComma": "es5",
+    "bracketSpacing": true,
+    "endOfLine": "lf",
+    "useTabs": false
 }
