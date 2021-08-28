@@ -1,17 +1,22 @@
-import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
+
+import { WeatherModel } from './Weather';
 import './Form.css';
 
 // API Key from https://openweathermap.org/api
 const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 const API_URL = 'https://api.openweathermap.org/data/2.5/weather?units=metric';
 
-const Form = ({ getWeather }) => {
-  const [city, setCity] = useState('');
-  const [country, setCountry] = useState('');
+type FormProps = {
+  getWeather: (data: any, resposeError?: string) => void;
+};
+
+const Form = ({ getWeather }: FormProps) => {
+  const [city, setCity] = useState<WeatherModel['city']>('');
+  const [country, setCountry] = useState<WeatherModel['country']>('');
   const [locationAvailable, setLocationAvailable] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (city && country) {
@@ -95,10 +100,6 @@ const Form = ({ getWeather }) => {
       </button>
     </form>
   );
-};
-
-Form.propTypes = {
-  getWeather: PropTypes.func,
 };
 
 export default React.memo(Form);

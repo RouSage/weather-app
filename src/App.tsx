@@ -2,23 +2,23 @@ import React, { useState } from 'react';
 
 import Titles from './components/Titles';
 import Form from './components/Form';
-import Weather from './components/Weather';
+import Weather, { WeatherModel } from './components/Weather';
 
 import './App.css';
 
-const App = () => {
-  const initialWeather = {
-    city: '',
-    country: '',
-    temperature: undefined,
-    humidity: undefined,
-    description: '',
-  };
+const initialValues: WeatherModel = {
+  city: '',
+  country: '',
+  description: '',
+  humidity: undefined,
+  temperature: undefined,
+};
 
-  const [weather, setWeather] = useState(initialWeather);
-  const [error, setError] = useState('');
+const App = (): JSX.Element => {
+  const [weather, setWeather] = useState<WeatherModel>(initialValues);
+  const [error, setError] = useState<string>('');
 
-  const getWeather = (data, responseError = null) => {
+  const getWeather = (data: any, responseError = '') => {
     if (!responseError) {
       setWeather({
         city: data.name,
@@ -29,7 +29,7 @@ const App = () => {
       });
       setError('');
     } else {
-      setWeather(initialWeather);
+      setWeather(initialValues);
       setError(responseError);
     }
   };
