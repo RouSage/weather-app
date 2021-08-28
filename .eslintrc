@@ -1,43 +1,41 @@
 {
-    "plugins": [
-        "prettier",
-        "react"
-    ],
-    "parser": "babel-eslint",
+    "root": true,
+    "parser": "@typescript-eslint/parser",
     "parserOptions": {
-        "ecmaVersion": 6,
+        "ecmaVersion": 11,
         "sourceType": "module",
         "ecmaFeatures": {
             "jsx": true
         }
     },
+    "plugins": [
+        "@typescript-eslint",
+        "react-hooks",
+        "jsx-a11y"
+    ],
+    "extends": [
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:jsx-a11y/recommended",
+        "plugin:import/recommended",
+        "plugin:import/typescript",
+        "plugin:prettier/recommended"
+    ],
     "env": {
         "es6": true,
         "browser": true,
         "node": true
     },
-    "extends": [
-        "airbnb",
-        "prettier"
-    ],
     "rules": {
-        "prettier/prettier": [
-            "error"
-        ],
         "no-trailing-spaces": 2,
-        "react/jsx-filename-extension": [
-            1,
-            {
-                "extensions": [
-                    ".js",
-                    ".jsx"
-                ]
-            }
-        ],
-        "react/prefer-es6-class": 1,
-        "react/require-default-props": "off",
-        "react/forbid-prop-types": "off",
-        "react/state-in-constructor": "off",
-        "react/jsx-one-expression-per-line": 0
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn",
+        "react/prop-types": "off"
+    },
+    "settings": {
+        "react": {
+            "pragma": "React",
+            "version": "detect"
+        }
     }
 }

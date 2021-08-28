@@ -1,23 +1,28 @@
-import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
+
+import { WeatherModel } from './Weather';
 import './Form.css';
 
 // API Key from https://openweathermap.org/api
 const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 const API_URL = 'https://api.openweathermap.org/data/2.5/weather?units=metric';
 
-const Form = ({ getWeather }) => {
-  const [city, setCity] = useState('');
-  const [country, setCountry] = useState('');
+type FormProps = {
+  getWeather: (data: any, resposeError?: string) => void;
+};
+
+const Form = ({ getWeather }: FormProps) => {
+  const [city, setCity] = useState<WeatherModel['city']>('');
+  const [country, setCountry] = useState<WeatherModel['country']>('');
   const [locationAvailable, setLocationAvailable] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (city && country) {
       const response = await fetch(
         `${API_URL}&q=${city},${country}&appid=${API_KEY}`,
-        { method: 'GET' },
+        { method: 'GET' }
       );
       const data = await response.json();
       getWeather(data);
@@ -33,7 +38,7 @@ const Form = ({ getWeather }) => {
 
         const response = await fetch(
           `${API_URL}&lat=${latitude}&lon=${longitude}&appid=${API_KEY}`,
-          { method: 'GET' },
+          { method: 'GET' }
         );
         const data = await response.json();
         getWeather(data);
@@ -45,7 +50,7 @@ const Form = ({ getWeather }) => {
         enableHighAccuracy: false,
         timeout: 5000,
         maximumAge: 0,
-      },
+      }
     );
   };
 
@@ -95,10 +100,6 @@ const Form = ({ getWeather }) => {
       </button>
     </form>
   );
-};
-
-Form.propTypes = {
-  getWeather: PropTypes.func,
 };
 
 export default React.memo(Form);
