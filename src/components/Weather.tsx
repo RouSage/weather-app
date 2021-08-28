@@ -1,6 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import './Weather.css';
+
+export interface WeatherModel {
+  city: string;
+  country: string;
+  description: string;
+  temperature?: number;
+  humidity?: number;
+}
+
+interface WeatherProps extends WeatherModel {
+  error?: string;
+}
 
 const Weather = ({
   city,
@@ -9,7 +20,7 @@ const Weather = ({
   humidity,
   description,
   error,
-}) => (
+}: WeatherProps): JSX.Element => (
   <div className='weather__info'>
     {city && country && (
       <p className='weather__key'>
@@ -35,14 +46,5 @@ const Weather = ({
     {error && <p className='weather__error'>{error}</p>}
   </div>
 );
-
-Weather.propTypes = {
-  city: PropTypes.string,
-  country: PropTypes.string,
-  temperature: PropTypes.number,
-  humidity: PropTypes.number,
-  description: PropTypes.string,
-  error: PropTypes.string,
-};
 
 export default React.memo(Weather);
