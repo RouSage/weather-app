@@ -2,10 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { WeatherModel } from './Weather';
 import './Form.css';
-
-// API Key from https://openweathermap.org/api
-const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
-const API_URL = 'https://api.openweathermap.org/data/2.5/weather?units=metric';
+import { fetchWeather, fetchWeatherByCoords } from '../api/api';
 
 type FormProps = {
   getWeather: (data: any, resposeError?: string) => void;
@@ -20,12 +17,12 @@ const Form = ({ getWeather }: FormProps) => {
     e.preventDefault();
 
     if (city && country) {
-      const response = await fetch(
-        `${API_URL}&q=${city},${country}&appid=${API_KEY}`,
-        { method: 'GET' }
-      );
-      const data = await response.json();
-      getWeather(data);
+      try {
+        const data = await fetchWeather(city, country);
+        getWeather(data);
+      } catch (error) {
+        getWeather(null, error as string);
+      }
     } else {
       getWeather(null, 'Please enter the value.');
     }
@@ -36,15 +33,18 @@ const Form = ({ getWeather }: FormProps) => {
       async (position) => {
         const { latitude, longitude } = position.coords;
 
-        const response = await fetch(
-          `${API_URL}&lat=${latitude}&lon=${longitude}&appid=${API_KEY}`,
-          { method: 'GET' }
-        );
-        const data = await response.json();
-        getWeather(data);
+        try {
+          const data = await fetchWeatherByCoords(latitude, longitude);
+
+          setCity('');
+          setCountry('');
+          getWeather(data);
+        } catch (error) {
+          getWeather(null, error as string);
+        }
       },
-      () => {
-        getWeather(null, 'The was an error getting your location.');
+      (e) => {
+        getWeather(null, e.message);
       },
       {
         enableHighAccuracy: false,
