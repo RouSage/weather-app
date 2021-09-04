@@ -1,5 +1,5 @@
 import React from 'react';
-import './Weather.css';
+import styled from 'styled-components';
 
 export interface WeatherModel {
   city: string;
@@ -21,34 +21,84 @@ const Weather = ({
   description,
   error,
 }: WeatherProps): JSX.Element => (
-  <div className='weather__info'>
+  <Wrapper>
     {city && country && (
-      <p className='weather__key'>
-        Location:{' '}
-        <span className='weather__value'>{`${city}, ${country}`}</span>
-      </p>
+      <WeatherKey>
+        Location: <WeatherValue>{`${city}, ${country}`}</WeatherValue>
+      </WeatherKey>
     )}
     {temperature && (
-      <p className='weather__key'>
-        Temperature:{' '}
-        <span className='weather__value'>{temperature}&deg; C</span>
-      </p>
+      <WeatherKey>
+        Temperature: <WeatherValue>{temperature}&deg; C</WeatherValue>
+      </WeatherKey>
     )}
     {humidity && (
-      <p className='weather__key'>
-        Humidity: <span className='weather__value'>{`${humidity}%`}</span>
-      </p>
+      <WeatherKey>
+        Humidity: <WeatherValue>{`${humidity}%`}</WeatherValue>
+      </WeatherKey>
     )}
     {description && (
-      <p className='weather__key'>
-        Conditions:{' '}
-        <span className='weather__value'>
+      <WeatherKey>
+        {'Conditions: '}
+        <WeatherValue>
           {description.replace(/^\w/, (c) => c.toUpperCase())}
-        </span>
-      </p>
+        </WeatherValue>
+      </WeatherKey>
     )}
-    {error && <p className='weather__error'>{error}</p>}
-  </div>
+    {error && <WeatherError>{error}</WeatherError>}
+  </Wrapper>
 );
 
 export default React.memo(Weather);
+
+const Wrapper = styled.article`
+  width: 60%;
+  font-size: 1.2rem;
+  font-weight: 200;
+  letter-spacing: 2px;
+
+  @media only screen and (max-width: 600px) {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+
+  @media only screen and (min-width: 600px) {
+    width: 90%;
+  }
+
+  @media only screen and (min-width: 992px) {
+    width: 80%;
+  }
+
+  @media only screen and (min-width: 1200px) {
+    width: 63%;
+    font-size: 1.5rem;
+  }
+`;
+
+const WeatherKey = styled.p`
+  color: #076969;
+  border-bottom: solid 2px rgba(255, 255, 255, 0.06);
+  padding: 20px 0;
+  font-weight: 400;
+
+  &:last-child {
+    border: 0;
+  }
+
+  @media only screen and (max-width: 600px) {
+    padding: 10px 0;
+  }
+`;
+
+const WeatherValue = styled.span`
+  color: #fff;
+  font-weight: 200;
+`;
+
+const WeatherError = styled.p`
+  color: #f16051;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  font-weight: 200;
+`;

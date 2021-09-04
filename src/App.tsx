@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { WeatherResponse } from './api/api';
-import Form from './components/Form';
+import WeatherForm from './components/Form';
 import Titles from './components/Titles';
 import Weather, { WeatherModel } from './components/Weather';
 
@@ -43,7 +43,7 @@ const App = (): JSX.Element => {
             <Titles />
           </div>
           <div className='form-container'>
-            <Form getWeather={getWeather} />
+            <WeatherForm getWeather={getWeather} />
             <Weather
               city={weather.city}
               country={weather.country}
