@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
 
+import {
+  fetchWeather,
+  fetchWeatherByCoords,
+  WeatherResponse,
+} from '../api/api';
 import { WeatherModel } from './Weather';
+
 import './Form.css';
-import { fetchWeather, fetchWeatherByCoords } from '../api/api';
 
 type FormProps = {
-  getWeather: (data: any, resposeError?: string) => void;
+  getWeather: (data: WeatherResponse | null, resposeError?: string) => void;
 };
 
 const Form = ({ getWeather }: FormProps) => {

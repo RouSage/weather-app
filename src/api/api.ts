@@ -4,12 +4,28 @@ import axios from 'axios';
 const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 const API_URL = 'https://api.openweathermap.org/data/2.5/weather?units=metric';
 
+export interface WeatherResponse {
+  weather: [
+    {
+      description: string;
+    }
+  ];
+  main: {
+    temp: number;
+    humidity: number;
+  };
+  sys: {
+    country: string;
+  };
+  name: string;
+}
+
 export const fetchWeather = async (
   city: string,
   country: string
-): Promise<any> => {
+): Promise<WeatherResponse> => {
   try {
-    const response = await axios.get(API_URL, {
+    const response = await axios.get<WeatherResponse>(API_URL, {
       method: 'GET',
       params: {
         q: `${city},${country}`,
@@ -26,9 +42,9 @@ export const fetchWeather = async (
 export const fetchWeatherByCoords = async (
   latitude: number,
   longitude: number
-): Promise<any> => {
+): Promise<WeatherResponse> => {
   try {
-    const response = await axios.get(API_URL, {
+    const response = await axios.get<WeatherResponse>(API_URL, {
       method: 'GET',
       params: {
         lat: latitude,

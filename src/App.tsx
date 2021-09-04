@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 
-import Titles from './components/Titles';
+import { WeatherResponse } from './api/api';
 import Form from './components/Form';
+import Titles from './components/Titles';
 import Weather, { WeatherModel } from './components/Weather';
 
 import './App.css';
@@ -18,8 +19,8 @@ const App = (): JSX.Element => {
   const [weather, setWeather] = useState<WeatherModel>(initialValues);
   const [error, setError] = useState<string>('');
 
-  const getWeather = (data: any, responseError = '') => {
-    if (!responseError) {
+  const getWeather = (data: WeatherResponse | null, responseError = '') => {
+    if (!responseError && data) {
       setWeather({
         city: data.name,
         country: data.sys.country,

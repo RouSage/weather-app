@@ -30,17 +30,21 @@ const Weather = ({
     )}
     {temperature && (
       <p className='weather__key'>
-        Temperature: <span className='weather__value'>{temperature}</span>
+        Temperature:{' '}
+        <span className='weather__value'>{temperature}&deg; C</span>
       </p>
     )}
     {humidity && (
       <p className='weather__key'>
-        Humidity: <span className='weather__value'>{humidity}</span>
+        Humidity: <span className='weather__value'>{`${humidity}%`}</span>
       </p>
     )}
     {description && (
       <p className='weather__key'>
-        Conditions: <span className='weather__value'>{description}</span>
+        Conditions:{' '}
+        <span className='weather__value'>
+          {description.replace(/^\w/, (c) => c.toUpperCase())}
+        </span>
       </p>
     )}
     {error && <p className='weather__error'>{error}</p>}
