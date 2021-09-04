@@ -7,21 +7,18 @@ input[type='text'] {
   border: 0;
   border-bottom: 1px solid #076969;
   width: 45%;
-  color: #ffffff;
+  color: #fff;
   font-weight: 100;
   font-size: 1.2rem;
   letter-spacing: 2px;
   padding-bottom: 5px;
   margin-right: 20px;
-}
-
-input[type='text'] {
   outline: none;
 }
 
 input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 30px #202020 inset;
-  -webkit-text-fill-color: #ffffff;
+  -webkit-text-fill-color: #fff;
 }
 
 .button {
@@ -29,17 +26,20 @@ input:-webkit-autofill {
   border-radius: 2px;
   padding: 8px 20px;
   margin: 10px auto 0 auto;
+
   /* width: 45%; */
   font-weight: 100;
   letter-spacing: 1px;
   font-size: 0.85rem;
   cursor: pointer;
-  color: #ffffff;
+  color: #fff;
   background-color: #076969;
 }
+
 .button:active {
   outline: none;
 }
+
 .button:disabled {
   opacity: 0.4;
   cursor: default;
@@ -55,6 +55,7 @@ input:-webkit-autofill {
     font-size: 0.9rem;
     margin-right: 10px;
   }
+
   input[type='text']#country {
     margin-right: 0;
   }
@@ -77,6 +78,7 @@ input:-webkit-autofill {
     font-size: 1rem;
     margin-right: 10px;
   }
+
   .button {
     width: 46%;
     margin-right: 10px;
