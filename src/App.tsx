@@ -6,6 +6,7 @@ import Titles from './components/Titles';
 import Weather, { WeatherModel } from './components/Weather';
 
 import './App.css';
+import GlobalStyles from './theme/globalstyles';
 
 const initialValues: WeatherModel = {
   city: '',
@@ -36,26 +37,29 @@ const App = (): JSX.Element => {
   };
 
   return (
-    <div className='wrapper'>
-      <main className='main'>
-        <div className='container'>
-          <div className='title-container'>
-            <Titles />
+    <>
+      <GlobalStyles />
+      <div className='wrapper'>
+        <main className='main'>
+          <div className='container'>
+            <div className='title-container'>
+              <Titles />
+            </div>
+            <div className='form-container'>
+              <WeatherForm getWeather={getWeather} />
+              <Weather
+                city={weather.city}
+                country={weather.country}
+                temperature={weather.temperature}
+                humidity={weather.humidity}
+                description={weather.description}
+                error={error}
+              />
+            </div>
           </div>
-          <div className='form-container'>
-            <WeatherForm getWeather={getWeather} />
-            <Weather
-              city={weather.city}
-              country={weather.country}
-              temperature={weather.temperature}
-              humidity={weather.humidity}
-              description={weather.description}
-              error={error}
-            />
-          </div>
-        </div>
-      </main>
-    </div>
+        </main>
+      </div>
+    </>
   );
 };
 

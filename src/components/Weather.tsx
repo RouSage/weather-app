@@ -77,7 +77,7 @@ const Wrapper = styled.article`
 `;
 
 const WeatherKey = styled.p`
-  color: #076969;
+  color: ${(props) => props.theme.colors.main};
   border-bottom: solid 2px rgba(255, 255, 255, 0.06);
   padding: 20px 0;
   font-weight: 400;
@@ -97,7 +97,7 @@ const WeatherValue = styled.span`
 `;
 
 const WeatherError = styled.p`
-  color: #f16051;
+  color: ${(props) => props.theme.colors.error};
   font-size: 1.2rem;
   letter-spacing: 1px;
   font-weight: 200;

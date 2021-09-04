@@ -119,7 +119,7 @@ const Form = styled.form`
 const TextInput = styled.input`
   background-color: transparent;
   border: 0;
-  border-bottom: 1px solid #076969;
+  border-bottom: 1px solid ${(props) => props.theme.colors.main};
   width: 45%;
   color: #fff;
   font-weight: 100;
@@ -177,7 +177,7 @@ const Button = styled.button`
   font-size: 0.85rem;
   cursor: pointer;
   color: #fff;
-  background-color: #076969;
+  background-color: ${(props) => props.theme.colors.main};
 
   &:active {
     outline: none;
