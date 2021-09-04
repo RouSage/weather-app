@@ -106,7 +106,8 @@ const Container = styled.main`
 const Hero = styled.section`
   height: 90vh;
   flex: 1 1 45%;
-  background: url('img/bg-320w.png') center center no-repeat;
+  background: url(${(props) => props.theme.bgImage.bg320}) center center
+    no-repeat;
   background-size: cover;
   display: flex;
   justify-content: center;
@@ -120,21 +121,25 @@ const Hero = styled.section`
 
   @media screen and (min-width: 601px) {
     flex: 1 0 30%;
-    background: url('img/bg-768w.png') center center no-repeat;
+    background: url(${(props) => props.theme.bgImage.bg768}) center center
+      no-repeat;
   }
 
   @media screen and (min-width: 769px) {
-    background: url('img/bg-992w.png') center center no-repeat;
+    background: url(${(props) => props.theme.bgImage.bg992}) center center
+      no-repeat;
   }
 
   @media screen and (min-width: 993px) {
     flex: 1 0 40%;
-    background: url('img/bg-1199w.png') center center no-repeat;
+    background: url(${(props) => props.theme.bgImage.bg1199}) center center
+      no-repeat;
   }
 
   @media screen and (min-width: 1200px) {
     flex: 1 1 50%;
-    background: url('img/bg.png') center center no-repeat;
+    background: url(${(props) => props.theme.bgImage.bg}) center center
+      no-repeat;
   }
 `;
 

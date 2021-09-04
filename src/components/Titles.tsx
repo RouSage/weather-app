@@ -33,7 +33,7 @@ const Title = styled.h1`
   }
 
   @media only screen and (min-width: 1200px) {
-    font-size: 3px;
+    font-size: 3rem;
   }
 `;
 

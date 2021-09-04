@@ -81,6 +81,7 @@ const WeatherKey = styled.p`
   border-bottom: solid 2px rgba(255, 255, 255, 0.06);
   padding: 20px 0;
   font-weight: 400;
+  margin: 0;
 
   &:last-child {
     border: 0;
