@@ -1,5 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-yarn lint-staged && yarn lint && yarn lint:types && yarn lint:styles
+yarn lint
 

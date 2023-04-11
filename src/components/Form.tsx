@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 
 import {
   fetchWeather,
   fetchWeatherByCoords,
   WeatherResponse,
-} from '../api/api';
-import { WeatherModel } from './Weather';
+} from "../api/api";
+import { WeatherModel } from "./Weather";
 
 type FormProps = {
   getWeather: (data: WeatherResponse | null, responseError?: string) => void;
 };
 
 const WeatherForm = ({ getWeather }: FormProps) => {
-  const [city, setCity] = useState<WeatherModel['city']>('');
-  const [country, setCountry] = useState<WeatherModel['country']>('');
+  const [city, setCity] = useState<WeatherModel["city"]>("");
+  const [country, setCountry] = useState<WeatherModel["country"]>("");
   const [locationAvailable, setLocationAvailable] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -28,7 +28,7 @@ const WeatherForm = ({ getWeather }: FormProps) => {
         getWeather(null, error as string);
       }
     } else {
-      getWeather(null, 'Please enter the value.');
+      getWeather(null, "Please enter the value.");
     }
   };
 
@@ -40,8 +40,8 @@ const WeatherForm = ({ getWeather }: FormProps) => {
         try {
           const data = await fetchWeatherByCoords(latitude, longitude);
 
-          setCity('');
-          setCountry('');
+          setCity("");
+          setCountry("");
           getWeather(data);
         } catch (error) {
           getWeather(null, error as string);
@@ -63,10 +63,10 @@ const WeatherForm = ({ getWeather }: FormProps) => {
     if (!navigator.geolocation) {
       setLocationAvailable(false);
     } else {
-      navigator.permissions.query({ name: 'geolocation' }).then((status) => {
-        if (status.state === 'granted' || status.state === 'prompt') {
+      navigator.permissions.query({ name: "geolocation" }).then((status) => {
+        if (status.state === "granted" || status.state === "prompt") {
           setLocationAvailable(true);
-        } else if (status.state === 'denied') {
+        } else if (status.state === "denied") {
           setLocationAvailable(false);
         }
       });
@@ -76,27 +76,27 @@ const WeatherForm = ({ getWeather }: FormProps) => {
   return (
     <Form onSubmit={handleSubmit}>
       <TextInput
-        type='text'
-        name='city'
-        id='city'
+        type="text"
+        name="city"
+        id="city"
         value={city}
-        placeholder='City...'
+        placeholder="City..."
         onChange={(e) => setCity(e.target.value)}
       />
       <TextInput
-        type='text'
-        name='country'
-        id='country'
+        type="text"
+        name="country"
+        id="country"
         value={country}
-        placeholder='Country...'
+        placeholder="Country..."
         onChange={(e) => setCountry(e.target.value)}
       />
-      <Button className='button' type='submit'>
+      <Button className="button" type="submit">
         Get Weather
       </Button>
       <Button
-        className='button'
-        type='button'
+        className="button"
+        type="button"
         onClick={getLocation}
         disabled={!locationAvailable}
       >

@@ -1,25 +1,25 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 
-import { WeatherResponse } from './api/api';
-import WeatherForm from './components/Form';
-import Titles from './components/Titles';
-import Weather, { WeatherModel } from './components/Weather';
-import GlobalStyles from './theme/globalstyles';
+import { WeatherResponse } from "../api/api";
+import WeatherForm from "../components/Form";
+import Titles from "../components/Titles";
+import Weather, { WeatherModel } from "../components/Weather";
+import Head from "next/head";
 
 const initialValues: WeatherModel = {
-  city: '',
-  country: '',
-  description: '',
+  city: "",
+  country: "",
+  description: "",
   humidity: undefined,
   temperature: undefined,
 };
 
 const App = (): JSX.Element => {
   const [weather, setWeather] = useState<WeatherModel>(initialValues);
-  const [error, setError] = useState<string>('');
+  const [error, setError] = useState<string>("");
 
-  const getWeather = (data: WeatherResponse | null, responseError = '') => {
+  const getWeather = (data: WeatherResponse | null, responseError = "") => {
     if (!responseError && data) {
       setWeather({
         city: data.name,
@@ -28,7 +28,7 @@ const App = (): JSX.Element => {
         humidity: data.main.humidity,
         temperature: data.main.temp,
       });
-      setError('');
+      setError("");
     } else {
       setWeather(initialValues);
       setError(responseError);
@@ -37,7 +37,9 @@ const App = (): JSX.Element => {
 
   return (
     <>
-      <GlobalStyles />
+      <Head>
+        <title>Weather Finder</title>
+      </Head>
       <Wrapper>
         <Main>
           <Container>
