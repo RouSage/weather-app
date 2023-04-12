@@ -1,8 +1,8 @@
-import axios from 'axios';
+import axios from "axios";
 
 // API Key from https://openweathermap.org/api
-const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
-const API_URL = 'https://api.openweathermap.org/data/2.5/weather?units=metric';
+const API_KEY = process.env.NEXT_PUBLIC_WEATHER_API_KEY;
+const API_URL = "https://api.openweathermap.org/data/2.5/weather?units=metric";
 
 export interface WeatherResponse {
   weather: [
@@ -20,41 +20,51 @@ export interface WeatherResponse {
   name: string;
 }
 
+export interface GetWeatherParams {
+  city: string;
+  country: string;
+}
+
 export const fetchWeather = async (
-  city: string,
-  country: string
+  _: string,
+  { arg }: { arg: GetWeatherParams }
 ): Promise<WeatherResponse> => {
   try {
     const response = await axios.get<WeatherResponse>(API_URL, {
-      method: 'GET',
+      method: "GET",
       params: {
-        q: `${city},${country}`,
+        q: `${arg.city},${arg.country}`,
         appid: API_KEY,
       },
     });
 
     return response.data;
   } catch {
-    throw 'The was some error. Please, try again later!';
+    throw "The was some error. Please, try again later!";
   }
 };
 
+export interface GetWeatherByCoordsParams {
+  latitude: number;
+  longitude: number;
+}
+
 export const fetchWeatherByCoords = async (
-  latitude: number,
-  longitude: number
+  _: string,
+  { arg }: { arg: GetWeatherByCoordsParams }
 ): Promise<WeatherResponse> => {
   try {
     const response = await axios.get<WeatherResponse>(API_URL, {
-      method: 'GET',
+      method: "GET",
       params: {
-        lat: latitude,
-        lon: longitude,
+        lat: arg.latitude,
+        lon: arg.longitude,
         appid: API_KEY,
       },
     });
 
     return response.data;
   } catch {
-    throw 'The was an error getting your location';
+    throw "The was an error getting your location";
   }
 };

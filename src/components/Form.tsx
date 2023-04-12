@@ -1,19 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
-import {
-  fetchWeather,
-  fetchWeatherByCoords,
-  WeatherResponse,
-} from "../api/api";
 import { WeatherModel } from "../types";
 import TextInput from "./TextInput";
 import useGetGeolocation from "../hooks/useGetGeolocation";
+import { GetWeatherParams } from "../services/weather.service";
 
 interface Props {
-  getWeather: (data: WeatherResponse | null, responseError?: string) => void;
+  isLoading: boolean;
+  onGetLocation: () => void;
+  onSubmit: (params: GetWeatherParams) => void;
 }
 
-const WeatherForm = ({ getWeather }: Props) => {
+const WeatherForm = ({ isLoading, onSubmit, onGetLocation }: Props) => {
   const [city, setCity] = useState<WeatherModel["city"]>("");
   const [country, setCountry] = useState<WeatherModel["country"]>("");
 
@@ -21,43 +19,7 @@ const WeatherForm = ({ getWeather }: Props) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    if (city && country) {
-      try {
-        const data = await fetchWeather(city, country);
-        getWeather(data);
-      } catch (error) {
-        getWeather(null, error as string);
-      }
-    } else {
-      getWeather(null, "Please enter the value.");
-    }
-  };
-
-  const getLocation = () => {
-    navigator.geolocation.getCurrentPosition(
-      async (position) => {
-        const { latitude, longitude } = position.coords;
-
-        try {
-          const data = await fetchWeatherByCoords(latitude, longitude);
-
-          setCity("");
-          setCountry("");
-          getWeather(data);
-        } catch (error) {
-          getWeather(null, error as string);
-        }
-      },
-      (e) => {
-        getWeather(null, e.message);
-      },
-      {
-        enableHighAccuracy: false,
-        timeout: 5000,
-        maximumAge: 0,
-      }
-    );
+    onSubmit({ city, country });
   };
 
   return (
@@ -82,16 +44,17 @@ const WeatherForm = ({ getWeather }: Props) => {
       </div>
       <div className="mt-3 flex items-center justify-center gap-2">
         <button
-          className="cursor-pointer rounded-sm border-0 bg-main px-3 py-2 text-sm font-light text-white active:outline-none md:text-xl"
+          className="cursor-pointer rounded-sm border-0 bg-main px-3 py-2 text-sm font-light text-white active:outline-none disabled:cursor-default disabled:opacity-40 md:text-xl"
           type="submit"
+          disabled={isLoading}
         >
           Get Weather
         </button>
         <button
           className="cursor-pointer rounded-sm border-0 bg-main px-3 py-2 text-sm font-light text-white active:outline-none disabled:cursor-default disabled:opacity-40 md:text-xl"
           type="button"
-          onClick={getLocation}
-          disabled={!isLocationAvailable}
+          onClick={onGetLocation}
+          disabled={!isLocationAvailable || isLoading}
         >
           Get Current Location
         </button>

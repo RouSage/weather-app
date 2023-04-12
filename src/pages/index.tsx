@@ -1,10 +1,16 @@
 import React, { useState } from "react";
-import { WeatherResponse } from "../api/api";
+import useSWRMutation from "swr/mutation";
 import WeatherForm from "../components/Form";
 import Titles from "../components/Titles";
 import Weather from "../components/Weather";
 import Head from "next/head";
 import { WeatherModel } from "../types";
+import {
+  GetWeatherParams,
+  WeatherResponse,
+  fetchWeather,
+  fetchWeatherByCoords,
+} from "../services/weather.service";
 
 const initialWeather: WeatherModel = {
   city: "",
@@ -18,19 +24,61 @@ const App = (): JSX.Element => {
   const [weather, setWeather] = useState<WeatherModel>(initialWeather);
   const [error, setError] = useState<string>("");
 
-  const getWeather = (data: WeatherResponse | null, responseError = "") => {
-    if (!responseError && data) {
-      setWeather({
-        city: data.name,
-        country: data.sys.country,
-        description: data.weather[0].description,
-        humidity: data.main.humidity,
-        temperature: data.main.temp,
-      });
-      setError("");
+  const handleSuccess = (data: WeatherResponse) => {
+    const { name, sys, weather, main } = data;
+
+    setWeather({
+      city: name,
+      country: sys.country,
+      description: weather[0].description,
+      humidity: main.humidity,
+      temperature: main.temp,
+    });
+    setError("");
+  };
+
+  const { trigger: getWeather, isMutating: isWeatherLoading } = useSWRMutation(
+    "getWeather",
+    fetchWeather,
+    {
+      onSuccess: handleSuccess,
+      onError: (err: string) => {
+        setWeather(initialWeather);
+        setError(err);
+      },
+    }
+  );
+  const { trigger: getWeatherByCoords, isMutating: isWeatherByCoordsLoading } =
+    useSWRMutation("getWeatherByCoords", fetchWeatherByCoords, {
+      onSuccess: handleSuccess,
+      onError: (err: string) => {
+        setWeather(initialWeather);
+        setError(err);
+      },
+    });
+
+  const handleGetLocation = () => {
+    navigator.geolocation.getCurrentPosition(
+      ({ coords }) => {
+        getWeatherByCoords(coords);
+      },
+      ({ message }) => {
+        setError(message);
+      },
+      {
+        enableHighAccuracy: false,
+        timeout: 5000,
+        maximumAge: 0,
+      }
+    );
+  };
+
+  const handleSubmit = (params: GetWeatherParams) => {
+    if (params.city && params.country) {
+      getWeather(params);
     } else {
       setWeather(initialWeather);
-      setError(responseError);
+      setError("Please enter the value.");
     }
   };
 
@@ -46,7 +94,11 @@ const App = (): JSX.Element => {
               <Titles />
             </section>
             <section className="bg-[#202020] p-4 md:px-5 md:pt-14">
-              <WeatherForm getWeather={getWeather} />
+              <WeatherForm
+                isLoading={isWeatherLoading || isWeatherByCoordsLoading}
+                onSubmit={handleSubmit}
+                onGetLocation={handleGetLocation}
+              />
               <Weather weather={weather} error={error} />
             </section>
           </div>
