@@ -1,16 +1,17 @@
+import Head from "next/head";
 import React, { useState } from "react";
 import useSWRMutation from "swr/mutation";
+
 import WeatherForm from "../components/Form";
 import Titles from "../components/Titles";
 import Weather from "../components/Weather";
-import Head from "next/head";
-import { WeatherModel } from "../types";
 import {
   GetWeatherParams,
   WeatherResponse,
   fetchWeather,
   fetchWeatherByCoords,
 } from "../services/weather.service";
+import { WeatherModel } from "../types";
 
 const initialWeather: WeatherModel = {
   city: "",

@@ -1,8 +1,8 @@
-import React from "react";
 import { AppProps } from "next/app";
-import "../styles/globals.css";
-import Head from "next/head";
 import { Merriweather, Open_Sans, Roboto_Slab } from "next/font/google";
+import Head from "next/head";
+import React from "react";
+import "../styles/globals.css";
 
 const openSans = Open_Sans({
   style: "normal",

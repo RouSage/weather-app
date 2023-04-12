@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
-import { WeatherModel } from "../types";
 import TextInput from "./TextInput";
 import useGetGeolocation from "../hooks/useGetGeolocation";
 import { GetWeatherParams } from "../services/weather.service";
+import { WeatherModel } from "../types";
 
 interface Props {
   isLoading: boolean;

@@ -1,4 +1,5 @@
 import React from "react";
+
 import { WeatherModel } from "../types";
 
 interface Props {
