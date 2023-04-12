@@ -7,6 +7,7 @@ import {
 } from "../api/api";
 import { WeatherModel } from "../types";
 import TextInput from "./TextInput";
+import useGetGeolocation from "../hooks/useGetGeolocation";
 
 interface Props {
   getWeather: (data: WeatherResponse | null, responseError?: string) => void;
@@ -15,7 +16,8 @@ interface Props {
 const WeatherForm = ({ getWeather }: Props) => {
   const [city, setCity] = useState<WeatherModel["city"]>("");
   const [country, setCountry] = useState<WeatherModel["country"]>("");
-  const [locationAvailable, setLocationAvailable] = useState(false);
+
+  const { isLocationAvailable } = useGetGeolocation();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -58,21 +60,6 @@ const WeatherForm = ({ getWeather }: Props) => {
     );
   };
 
-  useEffect(() => {
-    // Check if the user's device supports geolocation
-    if (!navigator.geolocation) {
-      setLocationAvailable(false);
-    } else {
-      navigator.permissions.query({ name: "geolocation" }).then((status) => {
-        if (status.state === "granted" || status.state === "prompt") {
-          setLocationAvailable(true);
-        } else if (status.state === "denied") {
-          setLocationAvailable(false);
-        }
-      });
-    }
-  }, []);
-
   return (
     <form className="mb-4 md:mb-8" onSubmit={handleSubmit}>
       <div className="flex flex-col items-center gap-2 md:flex-row md:gap-3">
@@ -104,7 +91,7 @@ const WeatherForm = ({ getWeather }: Props) => {
           className="cursor-pointer rounded-sm border-0 bg-main px-3 py-2 text-sm font-light text-white active:outline-none disabled:cursor-default disabled:opacity-40 md:text-xl"
           type="button"
           onClick={getLocation}
-          disabled={!locationAvailable}
+          disabled={!isLocationAvailable}
         >
           Get Current Location
         </button>
