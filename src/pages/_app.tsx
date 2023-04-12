@@ -32,11 +32,11 @@ const App = ({ Component, pageProps }: AppProps) => (
       <meta name="theme-color" content="#000000" />
       <meta name="description" content="Simple Weather app" />
     </Head>
-    <main
+    <div
       className={`${openSans.variable} ${merriweather.variable} ${robotoSlab.variable} font-sans`}
     >
       <Component {...pageProps} />
-    </main>
+    </div>
   </>
 );
 
