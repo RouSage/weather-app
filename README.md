@@ -1,5 +1,6 @@
 # React Weather App
 
+![Vercel](https://vercelbadge.vercel.app/api/RouSage/weather-app)
 ![GitHub](https://img.shields.io/github/license/RouSage/weather-app)
 
 This app allows you to find out the weather in your city.
