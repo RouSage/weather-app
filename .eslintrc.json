@@ -1,0 +1,29 @@
+{
+  "extends": [
+    "next/core-web-vitals",
+    "prettier"
+  ],
+  "rules": {
+    "import/order": [
+      2,
+      {
+        "groups": [
+          "external",
+          "index",
+          "internal",
+          [
+            "sibling",
+            "parent"
+          ],
+          "builtin",
+          "type"
+        ],
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        },
+        "newlines-between": "always"
+      }
+    ]
+  }
+}

@@ -1,105 +1,48 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
 
-export interface WeatherModel {
-  city: string;
-  country: string;
-  description: string;
-  temperature?: number;
-  humidity?: number;
-}
+import { WeatherModel } from "../types";
 
-interface WeatherProps extends WeatherModel {
+interface Props {
+  weather: WeatherModel;
   error?: string;
 }
 
-const Weather = ({
-  city,
-  country,
-  temperature,
-  humidity,
-  description,
-  error,
-}: WeatherProps): JSX.Element => (
-  <Wrapper>
-    {city && country && (
-      <WeatherKey>
-        Location: <WeatherValue>{`${city}, ${country}`}</WeatherValue>
-      </WeatherKey>
+const Weather = ({ weather, error }: Props) => (
+  <article className="flex flex-col gap-2 text-sm font-light md:gap-4 md:text-xl">
+    {!!weather.city && !!weather.country && (
+      <p className="m-0 border-b border-b-main text-main">
+        {"Location: "}
+        <span className="font-light text-white">
+          {weather.city}, {weather.country}
+        </span>
+      </p>
     )}
-    {temperature && (
-      <WeatherKey>
-        Temperature: <WeatherValue>{temperature}&deg; C</WeatherValue>
-      </WeatherKey>
+    {weather.temperature !== undefined && (
+      <p className="m-0 border-b border-b-main py-1 text-main md:py-3">
+        {"Temperature: "}
+        <span className="font-light text-white">
+          {weather.temperature}&deg; C
+        </span>
+      </p>
     )}
-    {humidity && (
-      <WeatherKey>
-        Humidity: <WeatherValue>{`${humidity}%`}</WeatherValue>
-      </WeatherKey>
+    {weather.humidity !== undefined && (
+      <p className="m-0 border-b border-b-main py-1 text-main md:py-3">
+        {"Humidity: "}
+        <span className="font-light text-white">{weather.humidity}%</span>
+      </p>
     )}
-    {description && (
-      <WeatherKey>
-        {'Conditions: '}
-        <WeatherValue>
-          {description.replace(/^\w/, (c) => c.toUpperCase())}
-        </WeatherValue>
-      </WeatherKey>
+    {!!weather.description && (
+      <p className="m-0 py-1 text-main md:py-3">
+        {"Conditions: "}
+        <span className="font-light text-white">
+          {weather.description.replace(/^\w/, (c) => c.toUpperCase())}
+        </span>
+      </p>
     )}
-    {error && <WeatherError>{error}</WeatherError>}
-  </Wrapper>
+    {!!error && (
+      <p className="text-sm font-light text-error md:text-xl">{error}</p>
+    )}
+  </article>
 );
 
-export default React.memo(Weather);
-
-const Wrapper = styled.article`
-  width: 60%;
-  font-size: 1.2rem;
-  font-weight: 200;
-  letter-spacing: 2px;
-
-  @media only screen and (max-width: 600px) {
-    width: 100%;
-    font-size: 0.9rem;
-  }
-
-  @media only screen and (min-width: 600px) {
-    width: 90%;
-  }
-
-  @media only screen and (min-width: 992px) {
-    width: 80%;
-  }
-
-  @media only screen and (min-width: 1200px) {
-    width: 63%;
-    font-size: 1.5rem;
-  }
-`;
-
-const WeatherKey = styled.p`
-  color: ${(props) => props.theme.colors.main};
-  border-bottom: solid 2px rgba(255, 255, 255, 0.06);
-  padding: 20px 0;
-  font-weight: 400;
-  margin: 0;
-
-  &:last-child {
-    border: 0;
-  }
-
-  @media only screen and (max-width: 600px) {
-    padding: 10px 0;
-  }
-`;
-
-const WeatherValue = styled.span`
-  color: #fff;
-  font-weight: 200;
-`;
-
-const WeatherError = styled.p`
-  color: ${(props) => props.theme.colors.error};
-  font-size: 1.2rem;
-  letter-spacing: 1px;
-  font-weight: 200;
-`;
+export default Weather;
