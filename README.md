@@ -5,7 +5,7 @@
 
 This app allows you to find out the weather in your city.
 
-It's made using [this](https://youtu.be/204C9yNeOYI) tutorial by [Hamza Mirza](https://github.com/hamza-mirza) but with little tweaks (components code, CSS, images, etc.).
+It's made using [this](https://youtu.be/204C9yNeOYI) tutorial by [Hamza Mirza](https://github.com/hamza-mirza) but with a lot of tweaks (components code, CSS, images, etc.).
 
 You can find the original source code [here](https://github.com/hamza-mirza/react-weather-app).
 
